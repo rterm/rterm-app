@@ -1,0 +1,51 @@
+{
+  "name": "rterm-app",
+  "productName": "rterm-app",
+  "version": "1.0.0",
+  "description": "- Remote Terminal Application",
+  "main": "./main.prod.js",
+  "author": {
+    "name": "Ly Nguyen",
+    "email": "ly@rterm.io",
+    "url": "git+https://github.com/rterm/rterm-app.git"
+  },
+  "scripts": {
+    "electron-rebuild": "node -r ../internals/scripts/BabelRegister.js ../internals/scripts/ElectronRebuild.js",
+    "postinstall": "yarn electron-rebuild"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@material-ui/core": "^4.11.0",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "@types/jest": "^24.0.0",
+    "@types/node": "^12.0.0",
+    "@types/react": "^16.9.0",
+    "@types/react-dom": "^16.9.0",
+    "@types/react-redux": "^7.1.9",
+    "axios": "^0.21.0",
+    "css-loader": "^5.0.0",
+    "env-cmd": "^10.1.0",
+    "eslint": "6.6.0",
+    "global": "^4.4.0",
+    "js-cookie": "^2.2.1",
+    "node-pty": "^0.9.0",
+    "node-sass": "^4.14.1",
+    "prettier": "^2.1.2",
+    "qs": "^6.9.4",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-redux": "^7.2.1",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "3.4.3",
+    "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0",
+    "typescript": "~3.7.2",
+    "ws": "^7.3.1"
+  },
+  "devDependencies": {
+    "electron-rebuild": "^2.3.2"
+  }
+}
