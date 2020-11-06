@@ -1,13 +1,14 @@
 import React from 'react';
 import { Route, Switch, Redirect } from 'react-router';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 
 import './Home.scss';
 
 interface PropsType {}
 
+// eslint-disable-next-line react/prefer-stateless-function
 class Home extends React.Component<PropsType> {
   render() {
     return (
