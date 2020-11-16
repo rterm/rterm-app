@@ -27,6 +27,16 @@ export default class AppUpdater {
 
 let mainWindow: BrowserWindow | null = null;
 
+// Deep linked url
+let deeplinkingUrl: any;
+
+function print(text: string) {
+  console.log(text);
+  if (mainWindow && mainWindow.webContents) {
+    mainWindow.webContents.executeJavaScript(`console.log("${text}")`);
+  }
+}
+
 if (process.env.NODE_ENV === 'production') {
   const sourceMapSupport = require('source-map-support');
   sourceMapSupport.install();
@@ -48,6 +58,29 @@ const installExtensions = async () => {
     extensions.map((name) => installer.default(installer[name], forceDownload))
   ).catch(console.log);
 };
+
+// Force Single Instance Application
+const gotTheLock = app.requestSingleInstanceLock();
+if (gotTheLock) {
+  app.on('second-instance', (_, argv) => {
+    // Someone tried to run a second instance, we should focus our window.
+
+    // Protocol handler for win32
+    // argv: An array of the second instance’s (command line / deep linked) arguments
+    if (process.platform === 'win32') {
+      // Keep only command line / deep linked arguments
+      deeplinkingUrl = argv.slice(1);
+    }
+    print(`app.makeSingleInstance# ${deeplinkingUrl}`);
+
+    if (mainWindow) {
+      if (mainWindow.isMinimized()) mainWindow.restore();
+      mainWindow.focus();
+    }
+  });
+} else {
+  app.quit();
+}
 
 const createWindow = async () => {
   if (
@@ -101,6 +134,13 @@ const createWindow = async () => {
   // Remove this if your app does not use auto updates
   // eslint-disable-next-line
   new AppUpdater();
+
+  // Protocol handler for win32
+  if (process.platform === 'win32') {
+    // Keep only command line / deep linked arguments
+    deeplinkingUrl = process.argv.slice(1);
+  }
+  print(`createWindow# ${deeplinkingUrl}`);
 };
 
 /**
@@ -135,4 +175,9 @@ app.on('activate', () => {
   // On macOS it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
   if (mainWindow === null) createWindow();
+});
+
+app.on('open-url', function (event, url) {
+  event.preventDefault();
+  print(`open-url# ${url}`);
 });
