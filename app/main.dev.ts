@@ -104,6 +104,15 @@ const createWindow = async () => {
 };
 
 /**
+ * Deep linking name
+ * paste this link into your browser
+ * rterm://param
+ */
+if (!app.isDefaultProtocolClient('rterm')) {
+  app.setAsDefaultProtocolClient('rterm');
+}
+
+/**
  * Add event listeners...
  */
 

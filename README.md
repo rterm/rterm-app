@@ -11,3 +11,8 @@ yarn dev
 ```bash
 yarn package
 ```
+
+### deep link
+
+paste this link into your browser
+rterm://param
