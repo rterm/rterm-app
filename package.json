@@ -53,8 +53,8 @@
     ]
   },
   "build": {
-    "productName": "ElectronReact",
-    "appId": "org.develar.ElectronReact",
+    "productName": "rTerm",
+    "appId": "org.develar.rTerm",
     "files": [
       "dist/",
       "node_modules/",
